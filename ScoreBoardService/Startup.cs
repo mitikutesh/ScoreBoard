@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ScoreBoardService.Data;
+using ScoreBoardService.HubConfig;
 
 namespace ScoreBoardService
 {
@@ -59,6 +60,7 @@ namespace ScoreBoardService
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ScoreBoardHub>("Score");
             });
         }
 
