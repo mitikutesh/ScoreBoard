@@ -7,12 +7,12 @@ namespace ScoreBoardService.Models
 {
     public class ScoreModel
     {
-        public List<int> Data { get; set; }
-        public string Player { get; set; }
+        public int Score { get; set; }
+        public List<string> PlayerNames { get; set; }
 
         public ScoreModel()
         {
-            Data = new List<int>();
+            PlayerNames = new List<string>();
         }
     }
 }

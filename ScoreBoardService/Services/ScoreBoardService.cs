@@ -30,7 +30,19 @@ namespace ScoreBoardService.Services
 
         public List<ScoreModel> GetScoreModels()
         {
-            return default;
+            var players = _scoreContext.Players.ToList();
+
+            var scores = new List<ScoreModel>();
+            foreach (var player in players)
+            {
+                ScoreModel scoreMode = new ScoreModel
+                {
+                    Score = player.Score
+                };
+                scoreMode.PlayerNames.Add(player.Name);
+                scores.Add(scoreMode);
+            }
+            return scores;
         }
     }
 }

@@ -26,7 +26,7 @@ namespace ScoreBoardService.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var timerManager = new SyncManager(() => _hub.Clients.All.SendAsync("transferchartdata", _scoreBoardService.GetScoreModels()));
+            var timerManager = new SyncManager(() => _hub.Clients.All.SendAsync("transferdata", _scoreBoardService.GetScoreModels()));
 
             return Ok(new { Message = "Request Completed" });
         }
