@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScoreBoardService", "ScoreBoardService\ScoreBoardService.csproj", "{A617E893-7A24-4D03-87F2-2E36BEFEB384}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScoreBoardServiceTest", "ScoreBoardServiceTest\ScoreBoardServiceTest.csproj", "{CE15C36A-6A19-4519-BE60-0E67E9FC9974}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A617E893-7A24-4D03-87F2-2E36BEFEB384}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A617E893-7A24-4D03-87F2-2E36BEFEB384}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A617E893-7A24-4D03-87F2-2E36BEFEB384}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A617E893-7A24-4D03-87F2-2E36BEFEB384}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE15C36A-6A19-4519-BE60-0E67E9FC9974}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE15C36A-6A19-4519-BE60-0E67E9FC9974}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE15C36A-6A19-4519-BE60-0E67E9FC9974}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE15C36A-6A19-4519-BE60-0E67E9FC9974}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EA2A7FF3-8E97-4F4D-AE07-D070B402A001}
+	EndGlobalSection
+EndGlobal
