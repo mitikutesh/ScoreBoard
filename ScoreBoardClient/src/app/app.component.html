@@ -1,0 +1,6 @@
+<div *ngIf="scoreList">
+<div *ngFor="let item of scoreList">
+<li>{{item.name}} : {{item.point}}</li>
+</div>
+</div>
+<router-outlet></router-outlet>

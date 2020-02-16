@@ -25,15 +25,23 @@ namespace ScoreBoard.API
             
             services.AddDbContext<ScoreContext>(opt => opt.UseSqlite("Data Source=ScoreBoard.db"));
             services.AddTransient<IScoreBoardService, ScoreBoardService>();
-            services.AddCors(opt =>
-            {
-                opt.AddPolicy("CorsPolicy", builder => builder
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials()
-                .WithOrigins("http://locahost:4200")
-                );
-            });
+            services.AddCors(options => options.AddPolicy("CorsPolicy",
+          builder =>
+          {
+              builder.AllowAnyMethod()
+                       .AllowAnyHeader()
+                     .WithOrigins("http://localhost:4200")
+                     .AllowCredentials();
+          }));
+            //services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
+            //{
+            //    builder
+            //        .AllowAnyMethod()
+            //        .AllowAnyHeader()
+            //        .AllowCredentials()
+            //        .WithOrigins("http://localhost:4200/"); ;
+            //}));
+
             services.AddSignalR();
             services.AddControllers();
         }
@@ -50,14 +58,12 @@ namespace ScoreBoard.API
 
             app.UseRouting();
 
-            app.UseCors("CorsPolicy");
-
             app.UseAuthorization();
-
+            app.UseCors("CorsPolicy");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<ScoreBoardHub>("scorehub");
+                endpoints.MapHub<ScoreBoardHub>("/signalHub");
             });
         }
 

@@ -26,8 +26,8 @@ namespace ScoreBoard.API.Controllers
         {
             //var timerManager = new SyncManager(() => _hub.Clients.All.SendAsync("transferdata", _scoreBoardService.GetScoreModels()));
 
-            //return Ok(new { Message = "Request Completed" });
-            return Ok("Working");
+            ////return Ok(new { Message = "Request Completed" });
+            //return Ok("Working");
         }
 
         // GET api/<controller>/5
