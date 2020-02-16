@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScoreBoardService", "ScoreBoardService\ScoreBoardService.csproj", "{A617E893-7A24-4D03-87F2-2E36BEFEB384}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScoreBoard.API", "ScoreBoardService\ScoreBoard.API.csproj", "{A617E893-7A24-4D03-87F2-2E36BEFEB384}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScoreBoardServiceTest", "ScoreBoardServiceTest\ScoreBoardServiceTest.csproj", "{CE15C36A-6A19-4519-BE60-0E67E9FC9974}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScoreBoardServiceTest", "ScoreBoardServiceTest\ScoreBoardServiceTest.csproj", "{CE15C36A-6A19-4519-BE60-0E67E9FC9974}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

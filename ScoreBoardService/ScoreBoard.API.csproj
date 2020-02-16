@@ -5,6 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Client\**" />
+    <Content Remove="Client\**" />
+    <EmbeddedResource Remove="Client\**" />
+    <None Remove="Client\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Services\SyncManager.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.1">
@@ -20,10 +31,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Client\" />
   </ItemGroup>
 
 

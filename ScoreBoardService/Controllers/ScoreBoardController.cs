@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using ScoreBoardService.HubConfig;
-using ScoreBoardService.Services;
+using ScoreBoard.API.HubConfig;
+using ScoreBoard.API.Models;
+using ScoreBoard.API.Services;
+using System;
+using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace ScoreBoardService.Controllers
+namespace ScoreBoard.API.Controllers
 {
-    [Route("api/[controller]")]
-    public class ScoreBoardController : Controller
+    [Route("[controller]")]
+    public class ScoreBoardController : ControllerBase
     {
         private IHubContext<ScoreBoardHub> _hub;
-        private ScoreBoardService.Services.ScoreBoardService _scoreBoardService;
 
-        public ScoreBoardController(IHubContext<ScoreBoardHub> hub, ScoreBoardService.Services.ScoreBoardService scoreBoardService)
+        private IScoreBoardService _scoreBoardService;
+
+        public ScoreBoardController(IHubContext<ScoreBoardHub> hub, IScoreBoardService scoreBoardService)
         {
             _hub = hub;
             _scoreBoardService = scoreBoardService;
@@ -26,9 +24,10 @@ namespace ScoreBoardService.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var timerManager = new SyncManager(() => _hub.Clients.All.SendAsync("transferdata", _scoreBoardService.GetScoreModels()));
+            //var timerManager = new SyncManager(() => _hub.Clients.All.SendAsync("transferdata", _scoreBoardService.GetScoreModels()));
 
-            return Ok(new { Message = "Request Completed" });
+            //return Ok(new { Message = "Request Completed" });
+            return Ok("Working");
         }
 
         // GET api/<controller>/5
@@ -40,8 +39,24 @@ namespace ScoreBoardService.Controllers
 
         // POST api/<controller>
         [HttpPost]
-        public void Post([FromBody]string value)
+        [ProducesResponseType(402)]
+        [ProducesResponseType(200, Type = typeof(bool))]
+        public async Task<IActionResult> PostAsync([FromBody]ScoreModel scoreModel)
         {
+            var saveResult = await _scoreBoardService.SaveSignalAsync(scoreModel);
+            if(saveResult)
+            {
+                ScoreViewModel scoreView = new ScoreViewModel
+                {
+                    Name = scoreModel.Name,
+                    Point = scoreModel.Point,
+                    SignalStamp = Guid.NewGuid().ToString()
+                };
+
+                await _hub.Clients.All.SendAsync("SignalMessageRecieved", scoreView);
+              
+            }
+            return Ok(saveResult);
         }
 
         // PUT api/<controller>/5

@@ -1,13 +1,13 @@
-﻿using ScoreBoardService.Data;
-using ScoreBoardService.Models;
+﻿using ScoreBoard.API.Models;
+using ScoreBoard.API.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ScoreBoardService.Services
+namespace ScoreBoard.API.Services
 {
-    public class ScoreBoardService
+    public class ScoreBoardService : IScoreBoardService
     {
         private ScoreContext _scoreContext;
 
@@ -16,33 +16,50 @@ namespace ScoreBoardService.Services
             _scoreContext = scoreContext;
         }
 
-        public  void Add(string name)
+        public void Add(string name)
         {
-            var player = new Player
+            var player = new ScoreViewModel
             {
                 Name = name
             };
             _scoreContext.Add(player);
         }
 
-        public IEnumerable<Player> Find(string name)
-            => _scoreContext.Players.Where(a => a.Name.Contains(name)).ToList();
 
-        public List<ScoreModel> GetScoreModels()
+        //public List<ScoreModel> GetScoreModels()
+        //{
+        //    var scores = _scoreContext.Scores.ToList();
+
+        //    var scoreModels = new List<ScoreModel>();
+        //    foreach (var score in scoreModels)
+        //    {
+        //        ScoreModel scoreMode = new ScoreModel
+        //        {
+        //           Name = score.Name,
+        //           Point = score.Point
+        //        };
+        //        scoreModels.Add(scoreMode);
+        //    }
+        //    return scoreModels;
+        //}
+
+        public async Task<bool> SaveSignalAsync(ScoreModel scoreModel)
         {
-            var players = _scoreContext.Players.ToList();
-
-            var scores = new List<ScoreModel>();
-            foreach (var player in players)
+            try
             {
-                ScoreModel scoreMode = new ScoreModel
+                Score score = new Score()
                 {
-                    Score = player.Score
+                    Name = scoreModel.Name,
+                    Point = scoreModel.Point
                 };
-                scoreMode.PlayerNames.Add(player.Name);
-                scores.Add(scoreMode);
+                _scoreContext.Scores.Add(score);
+                return await _scoreContext.SaveChangesAsync() > 0;
             }
-            return scores;
+            catch (Exception)
+            {
+                throw;
+            }
+           
         }
     }
 }

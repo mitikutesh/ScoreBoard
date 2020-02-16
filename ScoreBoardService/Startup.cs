@@ -1,20 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using ScoreBoardService.Data;
-using ScoreBoardService.HubConfig;
+using ScoreBoard.API.HubConfig;
+using ScoreBoard.API.Persistence;
+using ScoreBoard.API.Services;
 
-namespace ScoreBoardService
+namespace ScoreBoard.API
 {
     public class Startup
     {
@@ -28,15 +22,18 @@ namespace ScoreBoardService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            services.AddDbContext<ScoreContext>(opt => opt.UseSqlite("Data Source=ScoreBoard.db"));
+            services.AddTransient<IScoreBoardService, ScoreBoardService>();
             services.AddCors(opt =>
             {
                 opt.AddPolicy("CorsPolicy", builder => builder
-                .WithOrigins("http://locahost:4200")
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-                .AllowCredentials());
+                .AllowCredentials()
+                .WithOrigins("http://locahost:4200")
+                );
             });
-            services.AddDbContext<ScoreContext>(opt => opt.UseSqlite("Data Source=ScoreBoard.db"));
             services.AddSignalR();
             services.AddControllers();
         }
@@ -60,7 +57,7 @@ namespace ScoreBoardService
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<ScoreBoardHub>("Score");
+                endpoints.MapHub<ScoreBoardHub>("scorehub");
             });
         }
 

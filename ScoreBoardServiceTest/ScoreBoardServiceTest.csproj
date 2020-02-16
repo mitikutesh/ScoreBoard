@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ScoreBoardService\ScoreBoardService.csproj" />
+    <ProjectReference Include="..\ScoreBoardService\ScoreBoard.API.csproj" />
   </ItemGroup>
 
 </Project>

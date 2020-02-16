@@ -1,6 +1,6 @@
 using System;
 
-namespace ScoreBoardService
+namespace ScoreBoard.API
 {
     public class WeatherForecast
     {
