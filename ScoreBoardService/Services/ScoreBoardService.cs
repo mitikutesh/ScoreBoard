@@ -1,4 +1,5 @@
-﻿using ScoreBoard.API.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using ScoreBoard.API.Models;
 using ScoreBoard.API.Persistence;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,9 @@ namespace ScoreBoard.API.Services
             };
             _scoreContext.Add(player);
         }
+
+        public async Task<List<Score>> GetSingalAsync()
+        => await _scoreContext.Scores.ToListAsync();
 
 
         //public List<ScoreModel> GetScoreModels()

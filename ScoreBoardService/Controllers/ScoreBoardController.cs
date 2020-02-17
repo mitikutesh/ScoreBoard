@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.SignalR;
 using ScoreBoard.API.HubConfig;
 using ScoreBoard.API.Models;
 using ScoreBoard.API.Services;
+using ScoreBoard.API.TimerService;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ScoreBoard.API.Controllers
@@ -21,21 +24,36 @@ namespace ScoreBoard.API.Controllers
             _scoreBoardService = scoreBoardService;
         }
         // GET: api/<controller>
-        [HttpGet]
-        public IActionResult Get()
-        {
-            //var timerManager = new SyncManager(() => _hub.Clients.All.SendAsync("transferdata", _scoreBoardService.GetScoreModels()));
+        //[HttpGet]
+        //public async Task<IActionResult> GetAsync()
+        //{
+        //    var scores = await _scoreBoardService.GetSingalAsync();
+        //    List<ScoreViewModel> vm = new List<ScoreViewModel>();
+        //    foreach (var item in scores)
+        //    {
+        //        var k = new ScoreViewModel
+        //        {
+        //            Name = item.Name,
+        //            Point = item.Point,
+        //            SignalStamp = Guid.NewGuid().ToString()
+        //        };
+        //        vm.Add(k);
+        //    }
 
-            ////return Ok(new { Message = "Request Completed" });
-            //return Ok("Working");
-        }
+        //    var data = vm.OrderByDescending(a => a.Point).FirstOrDefault();
+
+        //    var timerManager = new TimerManager(() => _hub.Clients.All.SendAsync("SignalMessageRecieved", data));
+
+        //    //await _hub.Clients.All.SendAsync("SignalMessageRecieved", vm);
+        //    return Ok(new { Message = "Request Completed" });
+        //}
 
         // GET api/<controller>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+        //[HttpGet("{id}")]
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
 
         // POST api/<controller>
         [HttpPost]
@@ -53,10 +71,11 @@ namespace ScoreBoard.API.Controllers
                     SignalStamp = Guid.NewGuid().ToString()
                 };
 
+
                 await _hub.Clients.All.SendAsync("SignalMessageRecieved", scoreView);
-              
+
             }
-            return Ok(saveResult);
+            return Ok();
         }
 
         // PUT api/<controller>/5

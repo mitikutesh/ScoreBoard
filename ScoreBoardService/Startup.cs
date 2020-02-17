@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using ScoreBoard.API.HubConfig;
 using ScoreBoard.API.Persistence;
 using ScoreBoard.API.Services;
+using ScoreBoard.API.TimerService;
 
 namespace ScoreBoard.API
 {
@@ -33,15 +34,8 @@ namespace ScoreBoard.API
                      .WithOrigins("http://localhost:4200")
                      .AllowCredentials();
           }));
-            //services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
-            //{
-            //    builder
-            //        .AllowAnyMethod()
-            //        .AllowAnyHeader()
-            //        .AllowCredentials()
-            //        .WithOrigins("http://localhost:4200/"); ;
-            //}));
-
+            services.AddHostedService<ScoreUpdater>();
+            services.AddScoped<IScopedScoreUpdater, ScopedScoreUpdater>();
             services.AddSignalR();
             services.AddControllers();
         }

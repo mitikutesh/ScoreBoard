@@ -1,6 +1,54 @@
-<div *ngIf="scoreList">
-<div *ngFor="let item of scoreList">
-<li>{{item.name}} : {{item.point}}</li>
-</div>
-</div>
-<router-outlet></router-outlet>
+<div *ngIf="topscore">
+    <div>
+    <li>{{topscore.name}} : {{topscore.point}}</li>
+    </div>
+    </div>
+    
+    <div class="sidenav">
+        <div class="input-main-text">
+           <h2>SCORE BOARD</h2>
+           <p>Current Leader is {{topscore.name}}</p>
+           <p>Point {{topscore.point}}</p>
+        </div>
+     </div>
+     <div class="main">
+        <div class="col-md-6 col-sm-12">
+           <div class="input-form">
+              <!-- <form>
+                 <div class="form-group">
+                    <label>Player Name</label>
+                    <input type="text" class="form-control" placeholder="Player Name">
+                 </div>
+                 <div class="form-group">
+                    <label>Score</label>
+                    <input type="number" class="form-control" placeholder="Score">
+                 </div>
+                 <button (click)="onsubmit()" class="btn btn-black" >Submit</button>
+              </form>
+               -->
+               <form (ngSubmit)="onSubmit()" #usrScoreForm="ngForm" novalidate>
+            
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" class="form-control" id="name" 
+                      [(ngModel)]="userScore.name"  #name="ngModel">
+                     
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="score">Score</label>
+                    <input type="number" name="score" class="form-control" id="score" required  [(ngModel)]="userScore.point"  #score="ngModel">
+                    
+                  </div>
+                  <button class="btn btn-success" [disabled]="!usrScoreForm.form.valid">Submit</button>
+                  
+            
+                </form>
+              </div>
+        </div>
+     </div>
+    
+     
+    <router-outlet></router-outlet>
+    
+    

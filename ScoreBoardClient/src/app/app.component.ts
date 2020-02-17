@@ -10,16 +10,30 @@ import { ScoreService } from './Service/score.service';
 })
 export class AppComponent implements OnInit {
   title = 'ScoreBoardClient';
-  scoreList: ScoreViewModel[]=[];
-  
+  // scoreList: ScoreViewModel[]=[];
+  topscore : ScoreViewModel=null;
+  userScore= new ScoreViewModel('TEst',2,'tete');
+ 
   constructor(private scoreService  : ScoreService){}
 
   ngOnInit(){
     this.scoreService.recivedSignal.subscribe((score: ScoreViewModel) => {
-      this.scoreList.push(score);
-      console.log(score);
+      // this.scoreList.push(score);
+      this.topscore = score;
+      // console.log(score);
     })
-  }
- 
 
+  }
+
+
+
+  onSubmit() {
+
+   
+    this.scoreService.Create(this.userScore).subscribe(data => {
+      console.log(this.userScore);
+    });
+
+   
+  }
 }

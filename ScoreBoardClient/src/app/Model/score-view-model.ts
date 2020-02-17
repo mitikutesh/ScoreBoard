@@ -1,5 +1,9 @@
 export class ScoreViewModel {
-    name: string;
-    point: number;
-    SignalStamp:string
+    constructor( public name: string,
+        public point: number,
+        public SignalStamp:string){}
+    
+    // name: string;
+    // point: number;
+    // SignalStamp:string;
 }

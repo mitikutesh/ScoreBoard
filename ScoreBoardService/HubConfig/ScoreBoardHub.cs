@@ -13,6 +13,6 @@ namespace ScoreBoard.API.HubConfig
         {
 
         }
-        //public async Task BroadcastChartData(List<ScoreModel> data) => await Clients.All.SendAsync("broadcastchartdata", data);
+        public async Task BroadcastScoreData(List<ScoreModel> data) => await Clients.All.SendAsync("SignalMessageRecieved", data);
     }
 }
