@@ -10,6 +10,6 @@ namespace ScoreBoard.API.Services
     public interface IScoreBoardService
     {
         Task<bool> SaveSignalAsync(ScoreModel scoreModel);
-        Task<List<Score>> GetSingalAsync();
+        Task<List<Score>> GetScoreAsync();
     }
 }

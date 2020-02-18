@@ -9,10 +9,6 @@ namespace ScoreBoard.API.HubConfig
 {
     public class ScoreBoardHub : Hub
     {
-        public ScoreBoardHub()
-        {
-
-        }
         public async Task BroadcastScoreData(List<ScoreModel> data) => await Clients.All.SendAsync("SignalMessageRecieved", data);
     }
 }

@@ -30,25 +30,22 @@ namespace ScoreBoard.API.TimerService
             {
                 executionCount++;
 
-                var scores = await scoreBoardService.GetSingalAsync();
 
-                List<ScoreViewModel> vm = new List<ScoreViewModel>();
+                var scores = await scoreBoardService.GetScoreAsync();
+
+                List<ScoreViewModel> model = new List<ScoreViewModel>();
                 foreach (var item in scores)
                 {
-                    var k = new ScoreViewModel
+                    var temp = new ScoreViewModel
                     {
                         Name = item.Name,
                         Point = item.Point,
                         SignalStamp = Guid.NewGuid().ToString()
                     };
-                    vm.Add(k);
+                    model.Add(temp);
                 }
 
-                var data = vm.OrderByDescending(a => a.Point).FirstOrDefault();
-
-                await hub.Clients.All.SendAsync("SignalMessageRecieved", data);
-
-
+                await hub.Clients.All.SendAsync("SignalMessageRecieved", model);
                 await Task.Delay(10000, stoppingToken);
             }
         }

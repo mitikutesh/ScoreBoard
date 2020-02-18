@@ -2,11 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ScoreBoard.API.HubConfig;
-using ScoreBoard.API.Models;
 using ScoreBoard.API.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,7 +11,6 @@ namespace ScoreBoard.API.TimerService
 {
     public class ScoreUpdater : IHostedService, IDisposable
     {
-        private int executionCount = 0;
         private Timer _timer;
  
 
@@ -33,8 +29,6 @@ namespace ScoreBoard.API.TimerService
 
         private async Task DoWorkAsync(object state, CancellationToken stoppingToken)
         {
-            var count = Interlocked.Increment(ref executionCount);
-            //,IHubContext<ScoreBoardHub> hub, IScoreBoardService scoreBoardService
             using (var scope = Services.CreateScope())
             {
                 var scopedProcessingService =

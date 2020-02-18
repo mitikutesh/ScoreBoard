@@ -17,35 +17,10 @@ namespace ScoreBoard.API.Services
             _scoreContext = scoreContext;
         }
 
-        public void Add(string name)
-        {
-            var player = new ScoreViewModel
-            {
-                Name = name
-            };
-            _scoreContext.Add(player);
-        }
 
-        public async Task<List<Score>> GetSingalAsync()
+        public async Task<List<Score>> GetScoreAsync()
         => await _scoreContext.Scores.ToListAsync();
 
-
-        //public List<ScoreModel> GetScoreModels()
-        //{
-        //    var scores = _scoreContext.Scores.ToList();
-
-        //    var scoreModels = new List<ScoreModel>();
-        //    foreach (var score in scoreModels)
-        //    {
-        //        ScoreModel scoreMode = new ScoreModel
-        //        {
-        //           Name = score.Name,
-        //           Point = score.Point
-        //        };
-        //        scoreModels.Add(scoreMode);
-        //    }
-        //    return scoreModels;
-        //}
 
         public async Task<bool> SaveSignalAsync(ScoreModel scoreModel)
         {
